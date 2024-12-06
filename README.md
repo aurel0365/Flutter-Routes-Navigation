@@ -24,6 +24,23 @@ Aplikasi ini terdiri dari lima layar utama, masing-masing memiliki tujuan dan fu
 3. **Layar Ketiga**: Layar yang menampilkan aktivitas pribadi dan keterlibatan Anda dalam organisasi, dengan tombol untuk kembali ke layar pertama. 🗣️
 4. **Layar Keempat**: Menampilkan gambar CV Anda dengan tombol untuk kembali ke layar pertama. 📑
 
+## 🧭 Pendekatan Implementasi Navigasi
+Navigasi pada aplikasi ini menggunakan dua metode utama: Drawer dan Bottom Navigation Bar. Berikut adalah pendekatan yang diambil untuk masing-masing metode:
+# 1. Drawer
+- Setiap item dalam Drawer direpresentasikan menggunakan ListTile, dengan ikon (Icon) dan label (Text) untuk memberikan petunjuk visual. ListTile digunakan untuk membuat isi dengan tata letak yang mudah diatur.
+- Klik pada ListTile akan memicu fungsi onTap, yang mengatur indeks layar aktif (_currentIndex) menggunakan setState. digunakan untuk memperbarui tampilan aplikasi secara real-time, di mana nilai _currentIndex diubah sesuai dengan item menu yang dipilih, sehingga layar yang sesuai dari daftar _screens ditampilkan secara dinamis.
+- Drawer ditutup dengan memanggil Navigator.pop(context) untuk menjaga pengalaman pengguna tetap mulus.
+# 2. Bottom Navbar
+- menggunakan BottomNavigationBar yang memungkinkan pengguna mengakses layar utama aplikasi dengan cepat dan langsung, tanpa harus membuka menu tambahan seperti drawer.
+- Menentukan Indeks Layar Aktif dengan currentIndex
+- Menangani Klik button dengan onTap
+- Properti selectedItemColor menentukan warna ikon yang akan berubah ketika sedang diklik.
+- unselectedItemColor digunakan untuk warna utama ikon.
+
+## Kendala Selama Pengerjaan 
+1. Masalah Tombol back yang Menghilang:
+Ketika Drawer dibuat, terdapat tantangan di mana tombol back pada AppBar secara default menghilang.Dikarenakan drawer menutupi tombol back tetapi untuk mengatasi kendala ini saya menyesuaikan penempatannya dimana tombol back akan berada di bawah tombol drawer dan menggunakan properti leading di AppBar.
+
 ## 🔧 Instalasi dan Menjalankan Aplikasi
 
 Untuk memulai dengan proyek ini, ikuti langkah-langkah berikut:
