@@ -1,71 +1,73 @@
 import 'package:flutter/material.dart';
+import 'package:navigation_codelab/first_screen.dart';
 
 class SecondScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // AppBar dengan judul dan posisi center
       appBar: AppBar(
-        centerTitle: true, // Menyusun judul di tengah
+        centerTitle: true,
+        title: Text('About Me'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            // Mengganti layar saat tombol back ditekan
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => FirstScreen()),
+            );
+          },
+        ),
       ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(20.0), // Padding sekitar konten
+          padding: const EdgeInsets.all(20.0),
           child: Row(
-            // Menyusun widget secara horizontal (Row)
-            mainAxisAlignment: MainAxisAlignment.center, // Menyusun elemen-elemen di tengah secara horizontal
-            crossAxisAlignment: CrossAxisAlignment.center, // Menyusun elemen-elemen di tengah secara vertikal
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Teks di sebelah kiri
               Expanded(
-                flex: 2, // Memberikan fleksibilitas lebar pada kolom teks (lebih besar daripada gambar)
+                flex: 2,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 20.0), // Padding untuk memberikan jarak antara gambar dan teks
+                  padding: const EdgeInsets.only(left: 20.0),
                   child: Column(
-                    // Menyusun teks secara vertikal
-                    mainAxisAlignment: MainAxisAlignment.center, // Menyusun teks di tengah secara vertikal
-                    crossAxisAlignment: CrossAxisAlignment.start, // Menyusun teks dari kiri
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Teks pertama, nama
                       Text(
                         'Aurelia Davine Putri Nata',
                         style: TextStyle(
-                          fontSize: 35, // Ukuran font besar untuk nama
-                          fontWeight: FontWeight.bold, // Tebal
+                          fontSize: 35,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 20), // Jarak antara nama dan deskripsi
-
-                      // Teks kedua, deskripsi
+                      SizedBox(height: 20),
                       Text(
                         'Hello! I am Aurelia, a student of Ciputra University Makassar with a background in informatics. '
                         'I have experience in exam projects such as application development and UI/UX design. '
                         'In addition to education, I am also active in various committees and organizations on campus. '
                         'I have a lot of experience in managing events, making decorations for an event and other things.',
                         style: TextStyle(
-                          fontSize: 16, // Ukuran font untuk deskripsi
-                          color: Colors.grey[700], // Warna font abu-abu
+                          fontSize: 16,
+                          color: Colors.grey[700],
                         ),
-                        textAlign: TextAlign.justify, // Penyusunan teks agar rata kiri-kanan
+                        textAlign: TextAlign.justify,
                       ),
                     ],
                   ),
                 ),
               ),
-              SizedBox(width: 30), // Jarak antara teks dan gambar
-
-              // Gambar di sebelah kanan
+              SizedBox(width: 30),
               Expanded(
-                flex: 1, // Memberikan fleksibilitas lebar pada gambar (lebih kecil daripada teks)
+                flex: 1,
                 child: Center(
                   child: ClipRRect(
-                    // Membulatkan sudut gambar
                     borderRadius: BorderRadius.circular(15),
                     child: Image.asset(
-                      'assets/images/aurel2.jpeg', // Gambar diambil dari folder assets
-                      fit: BoxFit.cover, // Menjaga gambar sesuai dengan ruang yang ada
-                      height: 400, // Tinggi gambar
-                      width: 400, // Lebar gambar
+                      'assets/images/aurel2.jpeg',
+                      fit: BoxFit.cover,
+                      height: 400,
+                      width: 400,
                     ),
                   ),
                 ),
@@ -74,6 +76,7 @@ class SecondScreen extends StatelessWidget {
           ),
         ),
       ),
+      drawer: FirstScreen(),
     );
   }
 }
