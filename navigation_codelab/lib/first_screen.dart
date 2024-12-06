@@ -23,7 +23,6 @@ class _FirstScreenState extends State<FirstScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
       ),
       body: _screens[_currentIndex], // Menampilkan layar sesuai indeks
       drawer: Drawer( // Menambahkan Drawer
@@ -32,7 +31,7 @@ class _FirstScreenState extends State<FirstScreen> {
           children: <Widget>[
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: const Color.fromARGB(255, 91, 91, 91),
               ),
               child: Text(
                 'Menu',
@@ -86,10 +85,10 @@ class _FirstScreenState extends State<FirstScreen> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex, // Menentukan indeks aktif
+        currentIndex: _currentIndex, 
         onTap: (index) {
           setState(() {
-            _currentIndex = index; // Mengubah indeks saat tombol ditekan
+            _currentIndex = index; 
           });
         },
         selectedItemColor: Colors.blue, // Warna ikon yang dipilih
@@ -122,24 +121,24 @@ class FirstScreenContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center( // Membuat seluruh konten rata tengah
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center, // Menata widget di tengah secara vertikal
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CircleAvatar(
-            radius: 100, // Membuat gambar avatar berbentuk lingkaran dengan radius 100
-            backgroundImage: AssetImage('assets/images/aurelnama.jpeg'), // Menentukan gambar avatar
+            radius: 100, 
+            backgroundImage: AssetImage('assets/images/aurelnama.jpeg'),
           ),
           SizedBox(height: 20), // Memberi jarak antara gambar dan teks
           Text(
-            'Aurelia Davine Putri Nata', // Nama pengguna
+            'Aurelia Davine Putri Nata', 
             style: TextStyle(
-              fontSize: 24, // Ukuran font untuk nama
-              fontWeight: FontWeight.bold, // Menebalkan teks
+              fontSize: 24, 
+              fontWeight: FontWeight.bold, 
             ),
           ),
-          SizedBox(height: 5), // Memberi jarak antara nama dan teks selamat datang
+          SizedBox(height: 5), 
           Text(
-            'Welcome to my codelab', // Pesan sambutan
-            style: TextStyle(fontSize: 16, color: Colors.grey), // Ukuran font dan warna teks sambutan
+            'Welcome to my codelab', 
+            style: TextStyle(fontSize: 16, color: Colors.grey), 
           ),
         ],
       ),
