@@ -1,50 +1,51 @@
 # Navigation_Codelab 🚀
 
-Welcome to the "navigation_codelab" Flutter project! 🎉  
-This project was created as part of the **Routes & Navigation** codelab. The goal of this project is to build a Flutter application with multiple screens and implement navigation between them using various methods.
+Selamat datang di proyek Flutter **navigation_codelab**! 🎉  
+Proyek ini dibuat sebagai bagian dari codelab **Routes & Navigation**. Tujuan dari proyek ini adalah untuk membangun aplikasi Flutter dengan beberapa layar dan mempelajari cara menavigasi antar layar menggunakan berbagai teknik.
 
-## 📜 Objective
+## 📜 Tujuan
 
-The objective of this codelab is to guide you through building a Flutter app with multiple screens and navigation between those screens. By the end of this codelab, you will have built an app with different routes and learned how to navigate efficiently between screens.
+Tujuan utama dari codelab ini adalah untuk memandu Anda dalam membangun aplikasi Flutter dengan beberapa layar dan mengimplementasikan navigasi antar layar. Pada akhirnya, Anda akan memiliki pemahaman yang solid tentang manajemen rute dan cara bernavigasi dengan efisien antar layar.
 
-## ✨ Features
+## ✨ Fitur
 
-- **Multiple Screens**: This app includes multiple screens demonstrating navigation in Flutter. 📱
-- **Route Management**: Screens are connected via navigation routes, showcasing the `push` and `pop` navigation techniques. 🔄
-- **Button Interactions**: Buttons on the screens trigger navigation actions between screens. 🔘
-- **Navbar**: A navigation bar at the top of the app, providing quick access to various sections of the app. 📍
-- **Drawer**: A side drawer menu that allows users to navigate between different screens easily. 🗂️
+- **Beberapa Layar**: Aplikasi ini mencakup beberapa layar untuk menunjukkan cara kerja navigasi di Flutter. 📱
+- **Manajemen Rute**: Layar- layar dihubungkan melalui rute navigasi, menampilkan teknik seperti `push` dan `pop`. 🔄
+- **Interaksi Tombol**: Tombol pada layar memicu aksi navigasi untuk berpindah antar layar. 🔘
+- **Navbar**: Sebuah bilah navigasi di bagian atas aplikasi yang memberikan akses cepat ke berbagai bagian aplikasi. 📍
+- **Drawer**: Menu drawer samping yang memungkinkan pengguna untuk bernavigasi dengan mudah antar layar. 🗂️
 
-## 🖥️ Screens
+## 🖥️ Layar
 
-This app consists of five main screens, each with its own purpose and functionality:
+Aplikasi ini terdiri dari lima layar utama, masing-masing memiliki tujuan dan fungsinya sendiri:
 
-1. **First Screen**: The main screen featuring a self-image and a button to navigate to other screens. 🌟
-2. **Second Screen**: This screen explains your portfolio and allows you to navigate back to the first screen. 💼
-3. **Third Screen**: A screen that shows your personal activities and organizational involvement with a button to return to the first screen. 🗣️
-4. **Fourth Screen**: A screen displaying your CV image with a button to return to the first screen. 📑
+1. **Layar Pertama**: Layar utama dengan gambar diri Anda dan tombol untuk menavigasi ke layar lainnya. 🌟
+2. **Layar Kedua**: Layar yang menjelaskan portofolio Anda, dengan opsi untuk kembali ke layar pertama. 💼
+3. **Layar Ketiga**: Layar yang menampilkan aktivitas pribadi dan keterlibatan Anda dalam organisasi, dengan tombol untuk kembali ke layar pertama. 🗣️
+4. **Layar Keempat**: Menampilkan gambar CV Anda dengan tombol untuk kembali ke layar pertama. 📑
 
-## 🔧 Installation and Run the App
+## 🔧 Instalasi dan Menjalankan Aplikasi
 
-To get started with this project, follow these steps:
+Untuk memulai dengan proyek ini, ikuti langkah-langkah berikut:
 
-1. **Clone this repository**:
+1. **Clone repositori ini**:
    ```bash
    git clone https://github.com/your-username/navigation_codelab.git
 
-2. **Navigate into the project directory:**:
+2. **Masuk ke direktori proyek:**:
    ```bash
    cd navigation_codelab
    
-4. **Install dependencies:**:
+4. **Install dependensi:**
    ```bash
    flutter pub get
    
-6. **Run the app:**:
+6. **Jalankan Aplikasi:**:
    ```bash
    flutter run
 
-## 🛠️ Technologies Used
-- Flutter: Framework for building cross-platform mobile applications.
-- Dart: Programming language used with Flutter.
+## 🛠️ Teknologi yang Digunakan
+- Flutter: Framework untuk membangun aplikasi mobile lintas platform.
+- Dart: Bahasa pemrograman yang digunakan dalam Flutter.
+
 
