@@ -12,6 +12,8 @@ The objective of this codelab is to guide you through building a Flutter app wit
 - **Multiple Screens**: This app includes multiple screens demonstrating navigation in Flutter. 📱
 - **Route Management**: Screens are connected via navigation routes, showcasing the `push` and `pop` navigation techniques. 🔄
 - **Button Interactions**: Buttons on the screens trigger navigation actions between screens. 🔘
+- **Navbar**: A navigation bar at the top of the app, providing quick access to various sections of the app. 📍
+- **Drawer**: A side drawer menu that allows users to navigate between different screens easily. 🗂️
 
 ## 🖥️ Screens
 
@@ -21,21 +23,28 @@ This app consists of five main screens, each with its own purpose and functional
 2. **Second Screen**: This screen explains your portfolio and allows you to navigate back to the first screen. 💼
 3. **Third Screen**: A screen that shows your personal activities and organizational involvement with a button to return to the first screen. 🗣️
 4. **Fourth Screen**: A screen displaying your CV image with a button to return to the first screen. 📑
-5. **Fifth Screen**: This screen lists your contact information with a button to return to the first screen. 📬
 
-## 🔧 Installation and run app
+## 🔧 Installation and Run the App
 
 To get started with this project, follow these steps:
 
 1. **Clone this repository**:
    ```bash
    git clone https://github.com/your-username/navigation_codelab.git
+
 2. **Navigate into the project directory:**:
    ```bash
    cd navigation_codelab
+   
 4. **Install dependencies:**:
    ```bash
    flutter pub get
+   
 6. **Run the app:**:
    ```bash
    flutter run
+
+## 🛠️ Technologies Used
+- Flutter: Framework for building cross-platform mobile applications.
+- Dart: Programming language used with Flutter.
+
