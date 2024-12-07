@@ -1,93 +1,207 @@
 import 'package:flutter/material.dart';
 import 'package:navigation_codelab/first_screen.dart';
 
-class ThirdScreen extends StatelessWidget {
+class ThirdScreen extends StatefulWidget {
+  @override
+  _ThirdScreenState createState() => _ThirdScreenState();
+}
+
+class _ThirdScreenState extends State<ThirdScreen> {
+  final TextEditingController _controller = TextEditingController();
+  List<Map<String, String>> cards = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Activity'),
+        title: Text('Activity Screens'),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            // Mengganti layar saat tombol back ditekan
-            Navigator.pushReplacement(
+            Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => FirstScreen()),
+              (route) => false,
             );
           },
         ),
       ),
-      body: SingleChildScrollView(
+      body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildActivityCard(
-                title: 'Mantai Karaoke Party',
-                description: 'This is the description for Activity 1.',
-                imageUrl: 'assets/activity/port-item1.jpg',
+              TextField(
+                controller: _controller,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  labelText: 'Enter number of screens',
+                  border: OutlineInputBorder(),
+                ),
               ),
               SizedBox(height: 10),
-              _buildActivityCard(
-                title: 'Hackathon Devforge',
-                description: 'This is the description for Activity 2.',
-                imageUrl: 'assets/activity/port-item2.jpg',
+              ElevatedButton(
+                onPressed: _generateScreens,
+                child: Text('Generate Screens'),
               ),
-              SizedBox(height: 10),
-              _buildActivityCard(
-                title: 'Oweek 2024 as AMD',
-                description: 'This is the description for Activity 3.',
-                imageUrl: 'assets/activity/port-item3.jpg',
-              ),
-              SizedBox(height: 10),
-              _buildActivityCard(
-                title: 'Mantai Halloween',
-                description: 'This is the description for Activity 4.',
-                imageUrl: 'assets/activity/port-item4.jpg',
-              ),
+              SizedBox(height: 20),
+              if (cards.isNotEmpty)
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: cards.length,
+                    itemBuilder: (context, index) {
+                      final card = cards[index];
+                      return ListTile(
+                        title: Text(card['title']!),
+                        subtitle: Text(card['description']!),
+                        onTap: () {
+                          _navigateToScreen(index);
+                        },
+                      );
+                    },
+                  ),
+                ),
             ],
           ),
         ),
       ),
-      drawer: FirstScreen(),
     );
   }
 
-  Widget _buildActivityCard({
-    required String title,
-    required String description,
-    required String imageUrl,
-  }) {
-    return Card(
-      elevation: 5,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
+  void _generateScreens() {
+    final int numberOfScreens = int.tryParse(_controller.text) ?? 0;
+
+    if (numberOfScreens <= 0) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Please enter a valid number greater than 0.'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+      return;
+    }
+
+    setState(() {
+      cards = List.generate(numberOfScreens, (index) {
+        return {
+          'title': 'Activity ${index + 1}',
+          'description': 'Description for Activity Screen ${index + 1}.',
+          'imageUrl': 'assets/activity/port-item${(index % 4) + 1}.jpg',
+        };
+      });
+    });
+  }
+
+  void _navigateToScreen(int currentIndex) {
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => ActivityScreen(
+          title: cards[currentIndex]['title']!,
+          description: cards[currentIndex]['description']!,
+          imageUrl: cards[currentIndex]['imageUrl']!,
+          currentIndex: currentIndex,
+          totalCards: cards.length,
+          onNext: () => _navigateToScreen(currentIndex + 1),
+        ),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const begin = Offset(1.0, 0.0);
+          const end = Offset.zero;
+          const curve = Curves.easeInOut;
+
+          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          var offsetAnimation = animation.drive(tween);
+
+          return SlideTransition(position: offsetAnimation, child: child);
+        },
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
+    );
+  }
+}
+
+class ActivityScreen extends StatelessWidget {
+  final String title;
+  final String description;
+  final String imageUrl;
+  final int currentIndex;
+  final int totalCards;
+  final VoidCallback onNext;
+
+  const ActivityScreen({
+    required this.title,
+    required this.description,
+    required this.imageUrl,
+    required this.currentIndex,
+    required this.totalCards,
+    required this.onNext,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => FirstScreen()),
+              (route) => false,
+            );
+          },
+        ),
+      ),
+      body: GestureDetector(
+        onHorizontalDragEnd: (details) {
+          if (details.primaryVelocity! < 0 && currentIndex < totalCards - 1) {
+            onNext();
+          }
+        },
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.asset(imageUrl, width: double.infinity, height: 200, fit: BoxFit.cover),
+            Image.asset(
+              imageUrl,
+              height: 220,
+              fit: BoxFit.cover,
             ),
-            SizedBox(height: 10),
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                title,
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
             ),
-            SizedBox(height: 5),
-            Text(
-              description,
-              style: TextStyle(fontSize: 16, color: Colors.black54),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(
+                description,
+                style: TextStyle(fontSize: 16, color: Colors.black54),
+              ),
             ),
+            Spacer(),
+            if (currentIndex < totalCards - 1)
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: ElevatedButton(
+                    onPressed: onNext,
+                    child: Text('Next'),
+                  ),
+                ),
+              ),
+            if (currentIndex == totalCards - 1)
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Center(
+                  child: Text(
+                    'You have reached the last screen!',
+                    style: TextStyle(fontSize: 16, color: Colors.green),
+                  ),
+                ),
+              ),
           ],
         ),
       ),

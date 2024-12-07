@@ -64,11 +64,6 @@ flutter:
   assets:
     - assets/images/aurelnama.jpeg
     - assets/images/aurel2.jpeg
-    - assets/images/cvi/cv.jpeg
-    - assets/images/github.png
-    - assets/images/link.png
-    - assets/images/instagram.png
-    - assets/images/gmail.png
     - assets/activity/port-item1.jpg
     - assets/activity/port-item2.jpg
     - assets/activity/port-item3.jpg

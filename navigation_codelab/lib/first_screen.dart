@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'second_screen.dart'; // Mengimpor second screen
 import 'third_screen.dart'; // Mengimpor third screen
-import 'fourth_screen.dart'; // Mengimpor fourth screen
 
 class FirstScreen extends StatefulWidget {
   @override
@@ -16,83 +15,65 @@ class _FirstScreenState extends State<FirstScreen> {
     FirstScreenContent(),
     SecondScreen(),
     ThirdScreen(),
-    FourthScreen(),
   ];
+
+  void _onItemTapped(int index) {
+    if (index < 0 || index >= _screens.length) {
+      _showErrorDialog(); // Menampilkan dialog jika index tidak valid
+    } else {
+      setState(() {
+        _currentIndex = index;
+      });
+    }
+  }
+
+  void _showErrorDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Error'),
+          content: Text('Navigasi gagal! Halaman yang diminta tidak ada.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-      ),
+      appBar: AppBar(),
       body: _screens[_currentIndex], // Menampilkan layar sesuai indeks
-      drawer: Drawer( // Menambahkan Drawer
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 91, 91, 91),
-              ),
-              child: Text(
-                'Menu',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Home'),
-              onTap: () {
-                setState(() {
-                  _currentIndex = 0;
-                });
-                Navigator.pop(context); // Menutup drawer
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.info),
-              title: Text('About Me'),
-              onTap: () {
-                setState(() {
-                  _currentIndex = 1;
-                });
-                Navigator.pop(context); // Menutup drawer
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.work),
-              title: Text('Activity'),
-              onTap: () {
-                setState(() {
-                  _currentIndex = 2;
-                });
-                Navigator.pop(context); // Menutup drawer
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.contact_mail),
-              title: Text('CV'),
-              onTap: () {
-                setState(() {
-                  _currentIndex = 3;
-                });
-                Navigator.pop(context); // Menutup drawer
-              },
-            ),
-          ],
-        ),
-      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex, 
         onTap: (index) {
-          setState(() {
-            _currentIndex = index; 
-          });
+          // Periksa kesalahan navigasi dan beri umpan balik
+          if (index < 0 || index >= _screens.length) {
+            _showSnackBar('Navigasi gagal! Halaman tidak ditemukan.');
+          } else {
+            _onItemTapped(index);
+          }
         },
-        selectedItemColor: Colors.blue, // Warna ikon yang dipilih
-        unselectedItemColor: const Color.fromARGB(255, 0, 0, 0), // Warna ikon yang tidak dipilih
+        selectedItemColor: Colors.white, // Warna ikon yang dipilih
+        unselectedItemColor: Colors.grey, // Warna ikon yang tidak dipilih
+        backgroundColor: Colors.purple, // Warna latar belakang navbar
+        type: BottomNavigationBarType.fixed, // Menambahkan tipe navbar yang lebih fleksibel
+        elevation: 10, // Memberikan efek bayangan pada navbar
+        iconSize: 28, // Ukuran ikon
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home), // Ikon untuk layar pertama
@@ -105,10 +86,6 @@ class _FirstScreenState extends State<FirstScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.work), // Ikon untuk layar ketiga
             label: 'Activity',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.contact_mail), // Ikon untuk layar keempat
-            label: 'CV',
           ),
         ],
       ),
